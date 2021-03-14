@@ -1,0 +1,6 @@
+joint_file: /home/data/Motion3D/motionjson/joint_info.json
+model_path: /home/shizhelun/Motion/checkpoints/best.m
+keyframe_path: /home/shizhelun/Motion/stand-stretching_exercise_04_01_001_1:32:79.json
+trans_length: 47
+add_tgt_noise: True
+
