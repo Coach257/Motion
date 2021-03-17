@@ -180,8 +180,8 @@ def main():
 
     predictor = Predictor(cfg)
     pred_trans, pred_poses = predictor.predict(start_trans, start_poses, tgt_trans, tgt_poses, start_foot_contact, trans_length=cfg.trans_length, add_tgt_noise=cfg.add_tgt_noise)
-    os.makedirs(os.path.dirname(args.result_path), exist_ok=True)
-    pk.dump({"cfg": cfg, "trans": pred_trans, "poses": pred_poses}, open(args.result_path, 'wb'))
+    # os.makedirs(os.path.dirname(cfg.keyframe_path.replace(".json","_out.json")), exist_ok=True)
+    pk.dump({"cfg": cfg, "trans": pred_trans, "poses": pred_poses}, open(cfg.keyframe_path.replace(".json","_out.pkl"), 'wb'))
 
 
 if __name__ == "__main__":

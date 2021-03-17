@@ -1,12 +1,20 @@
 import json
 import pickle as pk
 import json
+from addict import Dict
+import yaml
 import numpy as np
+import argparse
 from utils.coordinates_transform import SkeletonCoordinatesTransform
 from utils.foot_contact import FootContact
 
 joint_info = json.load(open('/home/data/Motion3D/motionjson/joint_info.json'))
 
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Extract testcase")
+    parser.add_argument("config", help="Extraction config file path")
+    return parser.parse_args()
 
 def extract_testcase(raw_file, seed_frames, target_frame, joint_info):
     joints = joint_info['joints']
@@ -33,9 +41,17 @@ def extract_testcase(raw_file, seed_frames, target_frame, joint_info):
 
     return keyframe
     
+def main():
+    args = parse_args()
+    cfg = Dict(yaml.safe_load(open(args.config)))
+    data_file = cfg.data_file
+    start_n = cfg.start_n
+    end_n = cfg.end_n
+    target = cfg.target
+    joint_info = json.load(open(cfg.joint_file))
+    testcase = extract_testcase(data_file,(start_n,end_n),(target-1,target),joint_info)
+    json.dump(testcase,open("experiments/example/{}_{}:{}:{}.json".format(data_file.split("/")[-1].replace(".json",""),start_n,end_n,target-1),"w"))
 
 if __name__ == "__main__":
-    data_file = "/home/data/Motion3D/motionjson/motion/20210111/stand-stretching exercise_04/stand-stretching exercise_04_01_001.json"
-    testcase = extract_testcase(data_file, (1, 32), (79, 80), joint_info)
-    json.dump(testcase, open("/home/shizhelun/Motion/stand-stretching_exercise_04_01_001_1:32:79.json","w"))
+    main()
     

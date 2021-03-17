@@ -1,0 +1,5 @@
+data_file: "/home/data/Motion3D/motionjson/motion/20210112/stand-turn_round_01/stand-turn_round_01_01.json"
+start_n: 1
+end_n: 51
+target: 80
+joint_file: "/home/data/Motion3D/motionjson/joint_info.json"
