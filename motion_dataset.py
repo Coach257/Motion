@@ -28,7 +28,7 @@ class MotionDataset(Dataset):
         self.is_training = is_training
         self.min_trans = min_trans
         self.max_trans = max_trans
-        joint_info = json.load(open(os.path.join(data_path, joint_file)))
+        joint_info = json.load(open(joint_file))
         self.joints = joint_info['joints']
         self.parent = joint_info['parent']
         self.skel_offset = joint_info['skel_offset']
@@ -73,6 +73,7 @@ class MotionDataset(Dataset):
             poses = np.array(poses)
             # local_rotations = self.sct.rotvec2quat(poses)
             local_rotations = poses
+            import ipdb;ipdb.set_trace()
             # st = time.time()
             global_pos = self.sct.forward_kinematics(local_rotations, trans, rot_type="local")
             # print("Forward kinematics time:", time.time() - st)
@@ -190,7 +191,7 @@ class MotionDataset(Dataset):
 
 
 if __name__ == "__main__":
-    dataset = MotionDataset("sample\\", "joint_info.json", True, 60, 120)
+    dataset = MotionDataset("sample\\data\\", "sample\\joint_info.json", True, 60, 120)
     print("data feature dim:", dataset.get_dim())
     input, target,mask = dataset[0]
     import ipdb;ipdb.set_trace()

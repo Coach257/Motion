@@ -13,7 +13,6 @@ class CacheSchedule(object):
             self.cache = [pk.load(open(os.path.join(data_path, f), 'rb')) for f in files]
         else:
             assert type == "json"
-            data_path+="data\\"
             self.cache = [json.load(open(os.path.join(data_path, f), 'rb')) for f in files]
         print("Cache schedule num:", len(self.cache))
 

@@ -69,6 +69,7 @@ class SkeletonCoordinatesTransform(object):
         assert rot_type in ["global", "local"]
         assert rotation.shape[-2] == len(self.joints)
         assert rotation.shape[:-2] == hip_position.shape[:-1]
+        import ipdb;ipdb.set_trace()
         raw_size = rotation.shape
         position = np.zeros(raw_size[:-1] + (3,))
         if len(raw_size) == 2:

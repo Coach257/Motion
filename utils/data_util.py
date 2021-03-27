@@ -35,8 +35,6 @@ def segment_filter(global_pos, threshold):
 Get all data files
 """
 def get_all_files(data_path, ext=".npz"):
-    if("json" in ext):
-        data_path += ("data\\")
     data_files = []
     if os.path.exists(os.path.join(data_path, "data_files.meta")):
         with open(os.path.join(data_path, "data_files.meta")) as f:
@@ -74,7 +72,6 @@ def get_all_lengths(data_path, files,type = "pkl"):
             data = pk.load(open(os.path.join(data_path, f), "rb"))
             data_lengths.append(len(data['trans']))
     else :
-        data_path+="data\\"
         for f in files:
             data = json.load(open(os.path.join(data_path,f)))
             data_lengths.append(len(data['rotations']))
